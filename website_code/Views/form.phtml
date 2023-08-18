@@ -1,0 +1,112 @@
+<?php require('template/header2.phtml') ?>
+
+
+<div class="shadow-lg mb-5 bg-white" id="my-shadow">
+    <h2 id="my-booking-title" style="color: <?php echo $primary;?>">Book Your MOT</h2>
+    <div id="my-booking-box">
+        <form method="post" action="book.php" onsubmit="return validate_form(this);">
+            <div class="form-group" id="my-left-form-box">
+                <input type="date" name="date" min="<?php echo date('Y-m-d');?>" class="form-control-login" id="datepicker" placeholder="dd/mm/yyyy" value="" />
+            </div>
+            <div class="form-group" id="my-right-form-box">
+                <select class="form-control-login" id="location" name="location">
+                    <option value="select">Select a Location</option>
+                    <option value = "<?php echo $_SESSION['currentWebsiteLocation'][0][1]; ?>"><?php echo $_SESSION['currentWebsiteLocation'][0][1]; ?></option>
+                    <option value = "<?php echo $_SESSION['currentWebsiteLocation'][1][1]; ?>"><?php echo $_SESSION['currentWebsiteLocation'][1][1]; ?></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="input-box-m8">
+                    <input class="registration-ui" id="reg" type="text" name="reg" placeholder="YOUR REG">
+                    <span class="unit">UK</span>
+                </div>
+            </div>
+            <input type="hidden" id="chosen-day" name="chosen-day">
+            <div class="form-group" style="margin-top: 30px; padding-bottom: 20px">
+                <input type="submit" style="background-color: <?php echo $secondary;?>" class="btnSubmit" id="my-check-button" name="check" action="book.php" value="Check Availability" />
+            </div>
+            <p hidden id="bruh"></p>
+        </form>
+    </div>
+</div>
+
+
+<?php
+$i=0;
+foreach($closedDays as $closed)
+{
+    echo '<p hidden id='.$i.'>'.$closed.'</p>';
+    $i++;
+}
+echo '<p hidden id="total">'.$i.'</p>'
+?>
+
+<script>
+
+    var total = document.getElementById("total").innerText;
+    total = total -1;
+    i=1
+    closedDays = [];
+    while (i<=total)
+    {
+        closedDays.push(document.getElementById(i).innerText)
+        i++
+    }
+    //var closedDay = document.getElementById("4").innerText;
+    document.getElementById('bruh').innerHTML = closedDays;
+
+    // Saving date picker element and adding event listener
+    const picker = document.getElementById('datepicker');
+    picker.addEventListener('input', function(e){
+        // Saves value of the chosen date
+        var day = new Date(this.value).getUTCDay();
+        // If chosen day is a closed day, prevent it and show alert
+        if(document.getElementById('bruh').innerHTML.includes(day)) {
+            e.preventDefault();
+            this.value = '';
+            alert('Sorry, we are not open on this day. Please check the contact us page for our opening times and days.');
+        }
+        else{
+            document.getElementById('chosen-day').value = day;
+        }
+    });
+
+    function validate_form(thisForm)
+    {
+        with(thisForm) {
+
+            if(reg.value=="" || location.value=="select" || datepicker.value=="")
+            {
+                alert("Please fill in all required fields")
+                return false;
+            }
+
+            if (pass1.value.length<8)
+            {
+                pass1.focus();
+                alert("Enter a password longer than 8 characters");
+                return false;
+            }
+
+            if (!(/\d/.test(pass1.value)))
+            {
+                pass1.focus();
+                alert("Password must contain a number");
+                return false;
+            }
+
+            /*if (!(pass1==pass2))
+            {
+                pass1.focus();
+                alert("Passwords do not match");
+                return false;
+            }*/
+
+        }
+    }
+
+
+</script>
+
+<?php require('template/footer2.phtml') ?>

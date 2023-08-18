@@ -1,0 +1,78 @@
+<?php require('template/header2.phtml') ?>
+
+<?php
+
+if(isset($_SESSION["loggedin"]))
+{
+    echo '
+        <div class="shadow-lg mb-5 bg-white" id="my-shadow">
+            <div class="row">
+                <div class="col-sm" id="my-login-left">
+                    <img src="images/'. $_SESSION['web-image'] .'" width="100%" id="my-rounded-image">
+                </div>
+                <div class="col-md-6 login-form-2" id="my-login-right">
+                    <h4 class="card-title text-center mb-4 mt-1" style="color: '. $primary .'">Hi there '.$_SESSION["email"].'! You are currently logged in </h4>
+                    <hr>
+                    <form method="post">
+                        <div class="form-group" >
+                            <input class="btn btn-primary btn-block" style="background: '.$secondary.'" type="submit" name="logout" value="Click here to logout"</input>
+                        </div>
+                    </form>
+                    <div class="form-group" >
+                            <a class="btn btn-primary btn-block" href="profile.php" style="background: '.$secondary.'">Click here to edit '.$edit.'</a>
+                    </div>
+                </div>
+            </div>
+        </div>';
+}
+
+else {
+    echo '
+        <div class="shadow-lg mb-5 bg-white" id="my-shadow">
+            <div class="row">
+                <div class="col-sm" id="my-login-left">
+                    <img src="images/'. $_SESSION['web-image'] .'" width="100%" id="my-rounded-image">
+                </div>
+                <div class="col-md-6 login-form-2" id="my-login-right">
+                    <h3 id="my-login-title" style="color: '. $primary .'">Log In</h3>
+                    <form method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" name="email" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control-login" id="pass" name="password" placeholder="Your Password *" value="" />
+                        </div>
+                        <input type="checkbox" id="my-show-password" onclick="showPassword()"> Show Password
+                        <div class="form-group" style="margin-top: 30px">
+                            <input type="submit" class="btnSubmit" id="my-login-button" style="background-color: '. $secondary .'" name="login" value="Login" />
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                        </div>
+                        <label class="field-label-2" > Doesn &#x27;t Have Account? </label>
+                        <a href = "register.php" class="register-link-text" > Register</a >
+                    </form>
+                </div>
+            </div>
+        </div>';
+}
+    ?>
+
+<script>
+    function showPassword() {
+
+        var password = document.getElementById("pass");
+
+        if (password.type === "password") {
+            password.type = "text";
+        }
+
+        else {
+            password.type = "password";
+        }
+
+    }
+</script>
+
+
+<?php require('template/footer2.phtml') ?>

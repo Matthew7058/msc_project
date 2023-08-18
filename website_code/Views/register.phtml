@@ -1,0 +1,120 @@
+<?php require('template/header2.phtml') ?>
+
+<?php
+
+if(isset($_POST['register'])) {
+    echo
+        '
+        <div class="shadow-lg mb-5 bg-white" id="my-shadow">
+            <div class="row">
+                <div class="col-sm" id="my-login-left">
+                    <img src="images/'. $_SESSION['web-image'] .'" width="100%" height="100%" id="my-rounded-image">
+                </div>
+                <div class="col-md-6 login-form-2" id="my-login-right">
+                    <h3 id="my-login-title" style="color: '. $primary .'">Thank you for signing up ' . $_POST['email'] . '</h3>
+                    <h3 style="text-align: center"><a href="login.php">Click here to Login</a></h3>
+                </div>
+            </div>
+        </div>';
+}
+
+else {
+    echo '
+        <div class="shadow-lg mb-5 bg-white" id="my-shadow">
+            <div class="row">
+                <div class="col-sm" id="my-login-left">
+                    <img src="images/'. $_SESSION['web-image'] .'" width="100%" height="100%" id="my-rounded-image">
+                </div>
+                <div class="col-md-6 login-form-2" id="my-login-right">
+                    <h3 id="my-login-title" style="color: '. $primary .'">Log In</h3>
+                    <form method="post" onsubmit="return validate_form(this);">
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="nm" name="name" placeholder="Full Name *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="email" name="email" placeholder="Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="num" name="number" placeholder="Phone Number *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="add1" name="address1" placeholder="Address Line 1 *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="add2" name="address2" placeholder="Address Line 2" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="city" name="city" placeholder="Town/City *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control-login" id="post" name="postcode" placeholder="PostCode *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control-login" id="pass1" name="password1" placeholder="Password *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control-login" id="pass2" name="password2" placeholder="Confirm Password *" value="" />
+                        </div>
+                        <input type="checkbox" id="my-show-password" onclick="showPassword()"> Show Password
+                        <div class="form-group" style="margin-top: 30px">
+                            <input type="submit" class="btnSubmit" style="background-color: '. $secondary .'" id="my-login-button" name="register" value="Register" />
+                        </div>
+                        <label class="field-label-2" > Already Have Account? </label>
+                        <a href = "login.php" class="register-link-text" > Login</a >
+                    </form>
+                </div>
+            </div>
+        </div>';
+}
+?>
+
+<script>
+    function validate_form(thisForm)
+    {
+        with(thisForm) {
+
+            if(pass1.value=="" || pass2.value=="" || nm.value=="" || email.value=="" || num.value=="" || add1.value=="" || city.value=="" || post.value=="")
+            {
+                alert("Please fill in all required fields")
+                return false;
+            }
+
+            if (pass1.value.length<8)
+            {
+                pass1.focus();
+                alert("Enter a password longer than 8 characters");
+                return false;
+            }
+
+            if (!(/\d/.test(pass1.value)))
+            {
+                pass1.focus();
+                alert("Password must contain a number");
+                return false;
+            }
+
+            /*if (!(pass1===pass2))
+            {
+                pass1.focus();
+                alert("Passwords do not match");
+                return false;
+            }*/
+
+        }
+    }
+
+    function showPassword() {
+        var password1 = document.getElementById("pass1");
+        var password2 = document.getElementById("pass2");
+        if (password1.type === "password") {
+            password1.type = "text";
+            password2.type = "text";
+        }
+        else {
+            password1.type = "password";
+            password2.type = "password";
+        }
+    }
+</script>
+
+<?php require('template/footer2.phtml') ?>

@@ -1,0 +1,211 @@
+<?php require('template/header2.phtml') ?>
+
+<div class="shadow-lg mb-5 bg-white" id="my-shadow">
+
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return validate_form(this);">
+
+            <?php
+
+            $currentHour = (int)date('H');
+            $currentDate = (String)date('Y-m-d');
+
+            if(isset($_SESSION['booked']))
+            {
+                echo
+                '<div id="my-booking-box">
+                <h1 style="color: '.$primary.'" id="my-booking-title">Thank you for your booking</h1>
+                <p style="text-align: center">An Email has been sent to you containing your booking confirmation.</p>
+                <p style="text-align: center">If you need to amend or cancel your booking please <a href="contact.php">contact us</a>.</p>';
+            }
+
+            else{
+
+                echo
+                    '<h2 id="my-booking-title" style="color: '.$primary.'">Available times on ' . $_SESSION["date"] . ' at ' . $_SESSION["location"] . '</h2>
+                <div id="my-booking-box">
+                    <p>Please select a time that best suits you</p>
+                    <select class="form-control-login" name="time">';
+
+                $j=$_SESSION['dayOpening'];
+                $availableTimes[] = null;
+                $availableTimesValue[] = null;
+                //echo $j;
+                while($j<$_SESSION['dayClosing'])
+                {
+                    $availableTimes[] = $j;
+                    $availableTimesValue[] = $j;
+                    $j++;
+                }
+
+                //echo '<option>'.$availableTimes[0].'</option>';
+                //echo '<option>'.$availableTimes[1].'</option>';
+                //echo '<option>'.$availableTimes[2].'</option>';
+                //echo $availableTimes[0] . $availableTimes[1] . $availableTimes[2];
+                //array_push($availableTimes, 8,9,10,11,12,13,14,15,16);
+                //array_push($availableTimesValue, 8,9,10,11,12,13,14,15,16);
+
+                $i=0;
+                foreach ($availableTimes as $times)
+                {
+                    if($availableTimes[$i]<=$currentHour && $_SESSION['date']==$currentDate)
+                    {
+                        $availableTimes[$i] = 'This time slot has expired '. $i+$_SESSION["dayOpening"] .'';
+                        $availableTimesValue[$i] = $i+$i+$_SESSION["dayOpening"] .' disabled';
+                    }
+                    $i++;
+                }
+
+                foreach ($view->applicationData as $bookData)
+                {
+                    //echo '<option value = "unavailable">'.$bookData->getTime().':00</option>';
+                    $key=$bookData->getTime() - $_SESSION["dayOpening"] + 1;
+                    $bookedTime = $availableTimes[$key];
+
+                    $availableTimes[$key] = 'This time slot is booked '.$bookedTime .'';
+                    $availableTimesValue[$key] = $bookedTime.' disabled';
+
+                    if(isset($_SESSION['admin']))
+                    {
+                        $availableTimes[$key] = "BOOKED (Double booking will occur) ".$bookedTime;
+                        $availableTimesValue[$key] = $bookedTime;
+                    }
+                }
+
+                $noOfTimes = $_SESSION["dayClosing"] - $_SESSION["dayOpening"];
+
+                for ($i=1; $i<=$noOfTimes; $i++)
+                {
+                    echo '<option value = '.$availableTimesValue[$i].'>'.$availableTimes[$i].':00</option>';
+                }
+                echo'</select>';
+
+
+                /*echo
+                '<h2 id="my-booking-title" style="color: '.$primary.'">Available times on ' . $_SESSION["date"] . ' at ' . $_SESSION["location"] . '</h2>
+                <div id="my-booking-box">
+                    <p>Please select a time that best suits you</p>
+                    <select class="form-control-login" name="time">';
+                        $availableTimes[] = null;
+                        array_push($availableTimes, 8,9,10,11,12,13,14,15,16);
+
+                        $availableTimesValue[] = null;
+                        array_push($availableTimesValue, 8,9,10,11,12,13,14,15,16);
+
+                        $i=0;
+
+                        foreach ($availableTimes as $times)
+                        {
+                            if($availableTimes[$i]<=$currentHour && $_SESSION['date']==$currentDate)
+                            {
+                                $availableTimes[$i] = 'This time slot has expired '.$i+8 .'';
+                                $availableTimesValue[$i] = $i+8 .' disabled';
+                            }
+                            $i++;
+                        }
+
+                        foreach ($view->applicationData as $bookData)
+                        {
+                            //echo '<option value = "unavailable">'.$bookData->getTime().':00</option>';
+                            $key=$bookData->getTime() - 7;
+                            $bookedTime = $availableTimes[$key];
+
+                            $availableTimes[$key] = 'This time slot is booked '.$bookedTime .'';
+                            $availableTimesValue[$key] = $bookedTime.' disabled';
+
+                            if(isset($_SESSION['admin']))
+                            {
+                                $availableTimes[$key] = "BOOKED (Double booking will occur) ".$bookedTime;
+                                $availableTimesValue[$key] = $bookedTime;
+                            }
+                        }
+
+                        for ($i=1; $i<=9; $i++)
+                        {
+                            echo '<option value = '.$availableTimesValue[$i].'>'.$availableTimes[$i].':00</option>';
+                        }
+                echo'</select>';*/
+
+
+
+
+                        /*<option value="select">Select</option>
+                        <option value = "option1">8</option>
+                        <option value = "option2">9</option>
+                        <option value = "option3">10</option>
+                        <option value = "option4">11</option>
+                        <option value = "option5">12</option>
+                        <option value = "option6">13</option>
+                        <option value = "option7">14</option>
+                        <option value = "option8">15</option>
+                        <option value = "option9">16</option>*/
+
+
+                if (isset($_SESSION["loggedin"]) && !isset($_SESSION["admin"])) {
+
+                }
+
+                else {
+                    echo
+                    '<p>Please input your details or <a href=login.php style="color: '.$secondary.'">sign in</a> for a better booking experience</p>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="name" name="customer-name" placeholder="Customer Name *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="email" name="email" placeholder="Email '.$requirement.'" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="num" name="number" placeholder="Phone Number '.$requirement.'" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="add1" name="address1" placeholder="Address Line 1 '.$requirement.'" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="add2" name="address2" placeholder="Address Line 2 (Optional)" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="city" name="city" placeholder="Town/City '.$requirement.'" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control-login" id="postcode" name="postcode" placeholder="Postcode '.$requirement.'" value="" />
+                    </div>
+                    <p hidden id="hidden-admin">'. $_SESSION['admin'] .'</p>';
+                }
+
+                echo
+                '<div class="form-group" style="margin-top: 30px">
+                    <input type="submit" style="background-color: '.$secondary.'" name="book" class="btnSubmit" id="my-check-button" value="BOOK NOW" />
+                </div>';
+            }
+            ?>
+
+
+        </form>
+    </div>
+</div>
+
+<script>
+    function validate_form(thisForm)
+    {
+        with(thisForm) {
+
+            if(document.getElementById('hidden-admin').innerHTML==1)
+            {
+                if(name.value=="")
+                {
+                    alert("Please fill in the customer's name")
+                    return false;
+                }
+            }
+            else {
+                if(name.value=="" || email.value=="" || num.value=="" || add1.value=="" || city.value=="" || postcode.value=="")
+                {
+                    alert("Please fill in all required fields")
+                    return false;
+                }
+            }
+
+        }
+    }
+</script>
+
+<?php require('template/footer2.phtml') ?>

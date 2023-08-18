@@ -1,0 +1,65 @@
+<?php require('template/header2.phtml') ?>
+
+<div class="shadow-lg mb-5 bg-white" id="my-shadow">
+    <h2 id="my-booking-title" style="color: <?php echo $primary;?>">My Bookings</h2>
+    <div id="my-booking-box">
+
+<?php
+
+if(isset($_SESSION["loggedin"])) {
+
+    foreach ($view->applicationData as $appData) {
+
+        $bookID = $appData->getBookingID();
+        $date = $appData->getDate();
+        $newDate = date("d-m-Y", strtotime($date));
+        $req = "";
+        if($appData->getOtherReq() != "")
+        {
+            $req = ", Requirements: ". $appData->getOtherReq();
+        }
+        echo
+        '<div class="card text-center" id="booking-card">
+            <div class="card-header">
+                ' . $appData->getType() . ' - Reference #'. $bookID . '
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">'.$appData->getTime().':00 on '.$newDate.'</h5>
+                <p class="card-text">Vehicle: <b>'.$appData->getVehicle().'</b>'.$req.'</p>
+                <form method="post" action="'.$_SERVER['PHP_SELF'].'" onsubmit="return sure('.$bookID.')">
+                    <input type="submit" class="btn btn-primary" style="background: '.$secondary.'" name="cancel" value="Cancel Booking"/>
+                    <input type="hidden" name="id" value="'. $bookID .'">
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                '.$appData->getLocation().'
+            </div>
+        </div>';
+    }
+}
+
+else {
+    echo
+    '<p style="text-align: center; padding-bottom: 20px">Please <a href="login.php">sign in</a> to view your bookings</p>';
+}
+
+?>
+
+    </div>
+</div>
+
+<script>
+    function sure(id)
+    {
+        with (id) {
+            if (confirm("Are you sure you want to cancel booking reference: #" + id + "?")) {
+
+            } else {
+                alert("Booking reference: #" + id + " was NOT canceled.")
+                return false;
+            }
+        }
+    }
+</script>
+
+<?php require('template/footer2.phtml') ?>

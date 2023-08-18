@@ -1,0 +1,382 @@
+#title {
+    margin-top: 12px;
+    background-color: #fff;
+    color: #000;
+
+}
+#menu {
+    border-top: solid 6px #f00;
+    background-color: #f00;
+    color: #fff;
+    height: 400px;
+}
+
+#menu a {
+    background-color: #f00;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+#menu a:hover {
+    background-color: #f00;
+    color: #ddd;
+    text-decoration:underline;
+    display: block;
+}
+
+#content {
+    background-color: #fff;
+    border-top: solid 6px #f00;
+
+}
+
+#footer {
+    background-color: #173f7b;
+}
+
+.matthew-class
+{
+    padding-bottom: 300px;
+}
+
+.matt-fard
+{
+    padding-bottom:50px;
+}
+
+#form-message
+{
+    padding-top:7px;
+    padding-bottom:7px;
+    max-width: 50%;
+    margin:auto;
+}
+
+#profile-text
+{
+    padding-top:30px;
+    padding-bottom:2px;
+}
+
+.mot-faq{
+    position: relative;
+    margin: auto;
+    max-width: 600px;
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    margin-bottom: 1%;
+}
+
+.active1, .accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active1:after {
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    font-size: 14pt;
+    font-family: arial;
+}
+
+.gmaps-link
+{
+    color:white;
+}
+
+
+.browser-window {
+    width: 800px;
+    height: 600px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.browser-header {
+    height: 30px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #aaa;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.browser-buttons {
+    display: flex;
+}
+
+.browser-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.browser-button.close {
+    background-color: #fc605b;
+}
+
+.browser-button.minimize {
+    background-color: #fecb2f;
+}
+
+.browser-button.maximize {
+    background-color: #2aca3e;
+}
+
+.browser-url {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.browser-content {
+    background-color: #fff;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+
+#my-navbar {
+    padding-top:30px;
+    padding-bottom:75px;
+}
+
+#content3 {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+#my-navlink {
+    color: #3a3aa4;
+    margin-right:35px;
+    margin-top: 4px;
+    font-size: 11pt;
+    font-family: arial;
+}
+
+#my-navlink2 {
+    color: #3a3aa4;
+    font-size: 13pt;
+    font-family: arial;
+    cursor: pointer;
+}
+
+#my-navlink2 :hover {
+    text-decoration: underline;
+    background-color: rgba(2, 58, 120, 0.05);
+}
+
+#my-navlink3 {
+    color: #3a3aa4;
+    font-size: 13pt;
+    font-family: arial;
+    cursor: pointer;
+}
+
+#my-navlink3 :hover {
+    text-decoration: underline;
+    background-color: rgba(2, 58, 120, 0.05);
+}
+
+#my-navlink-last {
+    color: #3a3aa4;
+    margin-right:60px;
+    color: white;
+    border-style: solid;
+    padding: 7px 35px;
+    border-radius: 10px;
+    background: black;
+}
+
+#my-brand {
+    padding-right:0px;
+}
+
+@media only screen and (min-width: 1050px){
+    #my-heading {
+        vertical-align: middle;
+        margin-top:30%;
+        margin-bottom: 30px;
+        font-size: 40pt;
+    }
+}
+
+#my-book-mot-link {
+    color: white;
+    border-style: solid;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background: #023A78;
+}
+
+#index-left {
+    margin-right:70px;
+}
+
+#my-index-paragraph {
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.nav-item :hover {
+    text-decoration: underline;
+    background-color: rgba(2, 58, 120, 0.05);
+}
+
+#my-footer {
+    margin-top: 40px;
+    font-family: Arial;
+    color: white;
+    background-color: #023A78;
+}
+
+#my-footer-div {
+    position: relative;
+    margin-top: 20px;
+    max-width: 1000px;
+}
+
+
+#my-left-form-box {
+    padding-right: 12px;
+    width: 50%;
+    float: left;
+}
+
+#my-left-form-box2 {
+    padding-right: 12px;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+#my-right-form-box {
+    padding-left: 12px;
+    width: 50%;
+    float: right;
+}
+
+#my-right-form-box2 {
+    padding-left: 12px;
+    width: 50%;
+    float: right;
+    text-align: center;
+}
+
+#my-login-input {
+    border-color: #023A78;
+    margin-top: 20px;
+}
+
+
+
+.brick { width:120px; height:120px; background:#f2f2f2;}
+
+.brick2 { width:290px; height:500px; background:#f2f2f2;}
+
+.brick3 { width:437px; height:300px; background:#f2f2f2;}
+
+.brick4 { width:445px; height:200px; background:#f2f2f2;}
+
+.tile-picker  {
+    position:relative;
+    cursor:pointer;
+    background-color:#eaeaea;
+    background-position: center center;
+    background-size: cover;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.1);
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+    border:1px solid #bbb;  }
+
+.active.tile-picker { border-color: #aaa; }
+
+.tile-picker input[type=checkbox] {
+    opacity:0;
+    position:absolute;
+    left:-80px;  }
+
+.tile-checked {
+    display:block;
+    font-style:normal;
+    width:20px; height:20px;
+    position:absolute;
+    top:-2px;
+    right:-4px;
+}
+
+.tile-checked:after {
+    content:'\2713';
+    display:block;
+    line-height:18px; width:18px; height:18px;
+
+    background-color:#1481b8; color:#fff;
+    border-radius:2px;
+    font-size:13px;
+    text-align:center; font-weight:bold;
+
+    opacity:0;
+    transition: opacity .34s ease-in-out; }
+
+
+input[type=checkbox]:checked ~ .tile-checked:after {
+    opacity:1; }
+
+#logo-select {
+    background-size: 115px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#logo-select2 {
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#image-select {
+    background-size: 290px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#image-select2 {
+    background-size: 435px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#layout-select {
+    background-size: 430px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

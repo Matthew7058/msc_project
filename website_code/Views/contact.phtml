@@ -1,0 +1,109 @@
+<?php require('template/header2.phtml') ?>
+
+<div class="shadow-lg mb-5 bg-white" id="my-shadow">
+    <div class="row">
+        <div class="col-sm" id="my-contact-left">
+            <h1 style="color: <?php echo $primary;?>">Contact Us</h1>
+            <div>Contact us or submit your enquiries here and we will get back to you as soon as possible.<br>‍</div>
+            <div class="div-block-34"><img src="images/perm_phone_msg_24px.svg" loading="lazy" width="18" alt="">
+                <a href="tel:01625872807"><?php echo $_SESSION['web-number']; ?></a>
+            </div>
+            <div>
+                <img src="images/alternate_email_24px.svg" loading="lazy" width="18" alt="">
+                <a href="mailto:garagename@garage.com?subject=Enquiries"><?php echo $_SESSION['web-email'];?></a>
+            </div>
+            <div>
+                <img src="images/location_on_24px.svg" loading="lazy" width="18" alt="">
+                <a href="https://www.google.com/maps"><?php echo $_SESSION['currentWebsiteLocation'][0][1];?></a>
+            </div>
+            <?php
+            if($_SESSION['currentWebsiteLocation'][1][1] != null)
+            {
+                echo'
+                <div>
+                    <img src="images/location_on_24px.svg" loading="lazy" width="18" alt="">
+                    <a href="https://www.google.com/maps">'.$_SESSION["currentWebsiteLocation"][1][1].'</a>
+                </div>
+                ';
+            }
+
+            ?>
+            <h4 id="my-contact-title" style="color: <?php echo $primary;?>">Opening Hours</h4>
+            <div>
+                <table class="table table-bordered" style="font-size: 45%">
+                    <thead>
+                    <tr>
+                        <th scope="col">Day</th>
+                        <th scope="col">Open</th>
+                        <th scope="col">Close</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="col">Monday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][0]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][0]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][0]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][0]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Tuesday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][1]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][1]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][1]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][1]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Wednesday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][2]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][2]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][2]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][2]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Thursday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][3]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][3]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][3]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][3]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Friday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][4]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][4]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][4]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][4]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Saturday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][5]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][5]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][5]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][5]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Sunday</th>
+                        <td><?php if($_SESSION['currentWebsiteHours'][6]->getOpeningTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][6]->getOpeningTime() . ':00';}?></td>
+                        <td><?php if($_SESSION['currentWebsiteHours'][6]->getClosingTime()==25){echo 'CLOSED';} else{echo $_SESSION['currentWebsiteHours'][6]->getClosingTime() . ':00';}?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 login-form-2" id="my-login-right">
+            <div id="my-contact-box">
+                <h4 id="my-contact-title" style="color: <?php echo $primary;?>">Send us a Message</h4>
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="contact-name" id="my-login-input" placeholder="Your Name *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="contact-phone" id="my-login-input" placeholder="Your Phone Number *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="contact-email" id="my-login-input" placeholder="Your Email *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="contact-subject" id="my-login-input" placeholder="Message Subject *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="contact-message" id="my-message-input" placeholder="Message *" value="" />
+                    </div>
+                    <div class="form-group" style="margin-top: 30px">
+                        <input type="submit" class="btnSubmit" style="background-color: <?php echo $secondary;?>" name="submit" id="my-login-button" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require('template/footer2.phtml') ?>

@@ -1,0 +1,269 @@
+<?php require('template/header.phtml') ?>
+<body>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <h1 class="text-white font-weight-bold">Welcome to V8 Web Tech's Garage Website Builder</h1>
+                <hr class="divider" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <!-- OK -->
+                <div class="w3-content w3-section" style="max-width:500px">
+                    <p class="mySlides mb-5" id="slide-quote" style="width:100%">Expertly engineered website solutions for garages, making car care easier for you and your customers.</p>
+                    <p class="mySlides mb-5" id="slide-quote" style="width:100%">Transform your garage's online presence with our expertly designed websites.</p>
+                    <p class="mySlides mb-5" id="slide-quote" style="width:100%">Empowering garages with cutting-edge web technology.</p>
+                    <p class="mySlides mb-5" id="slide-quote" style="width:100%">Elevate your business with a state-of-the-art booking system.</p>
+                </div>
+
+                <script>
+                var myIndex = 0;
+                carousel();
+
+                function carousel() {
+
+                  var x = document.getElementsByClassName("mySlides");
+                  for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                  }
+                  myIndex++;
+                  if (myIndex > x.length) {myIndex = 1}
+                  x[myIndex-1].style.display = "block";
+                  setTimeout(carousel, 20000); // Change image every 2 seconds
+                }
+
+
+
+                </script>
+
+                <!-- end -->
+
+                <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- About-->
+<section class="page-section bg-primary" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white mt-0">No Computer Knowledge Needed!</h2>
+                <hr class="divider divider-light" />
+                <p class="text-white-75 mb-4">Build a website cutting edge website for your MOT garage in under 10 minutes with our simple tool! It's as easy as filling in some details about your garage and choosing a design that you like!<br><br>Keep scrolling to see some example websites, or...</p>
+                <a class="btn btn-light btn-xl" href="#contact">Get Started Now!</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services-->
+<section class="page-section" id="services">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center mt-0">Try It For Free</h2>
+        <hr class="divider" />
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Hassle-free</h3>
+                    <p class="text-muted mb-0">This tool is designed with simplicity in mind, making it easy for your garage to manage bookings and communicate with customers.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Professional Designs</h3>
+                    <p class="text-muted mb-0">Choose a design that suits your business best by picking from a list of expertly designed layouts.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Website Hosting</h3>
+                    <p class="text-muted mb-0">We will make sure your website is live and ready to use straight away, providing you with a unique URL to your site.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
+                    <h3 class="h4 mb-2">Garages Love It</h3>
+                    <p class="text-muted mb-0">A good website for your business allows you to focus on what really matters, and your customers will love it too!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Portfolio-->
+<section class="page-section" id="portfolio">
+<div style="max-width: 1200px; position: relative; margin: auto">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-lg-4 col-sm-6" style="width: 33%">
+                <a class="portfolio-box" href="images/bakestone-site.png">
+                    <img class="img-fluid" style="height: 271px; width: 100%" src="images/bakestone.png" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">MOT Booking Website</div>
+                        <div class="project-name">Bakestone Motors</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6" style="width: 33%">
+                <a class="portfolio-box" href="images/krm-site.png">
+                    <img class="img-fluid" style="height: 271px; width: 100%" src="images/krm.png" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Business Website</div>
+                        <div class="project-name">KRM</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6" style="width: 33%">
+                <a class="portfolio-box" href="images/inmotion-site.png">
+                    <img class="img-fluid" src="images/inmotion.png" style="height: 271px; width: 100%" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Online Shop</div>
+                        <div class="project-name">InMotion</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- Sign Up-->
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 class="mt-0">Get Started Now!</h2>
+                <hr class="divider" />
+                <p class="text-muted mb-5">Ready to take your garage to the next step? Create an account my filling in your personal details below.</p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6">
+                <form id="contactForm" method="post" action="builder.php" onsubmit="return validate_form(this)">
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="nm" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                        <label for="nm">Full name</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                    </div>
+                    <!-- Email address input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                        <label for="email">Email address</label>
+                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                    </div>
+                    <!-- Password input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="pass1" name="password1" type="password" placeholder="(123) 456-7890" data-sb-validations="required" />
+                        <label for="pass1">Password</label>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    </div>
+                    <!-- Password confirm input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="pass2" name="password2" type="password" placeholder="(123) 456-7890" data-sb-validations="required" />
+                        <label for="pass2">Confirm Password</label>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    </div>
+                    <input type="checkbox" id="my-show-password" style="margin-bottom: 15px" onclick="showPassword()"> <label for="my-show-password">Show Password</label>
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="d-grid"><input class="btn btn-primary btn-xl" id="submitButton" value="submit" name="step1" type="submit"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Show Password JS-->
+<script>
+    function showPassword() {
+        var password1 = document.getElementById("pass1");
+        var password2 = document.getElementById("pass2");
+        if (password1.type === "password") {
+            password1.type = "text";
+            password2.type = "text";
+        }
+        else {
+            password1.type = "password";
+            password2.type = "password";
+        }
+    }
+</script>
+
+<!-- Validate form JS -->
+<script>
+    function validate_form(thisForm)
+    {
+        with(thisForm) {
+
+            if(nm.value=="" || email.value=="" || pass1.value=="" || pass2.value=="")
+            {
+                alert("Please fill in all required fields")
+                return false;
+            }
+
+            if (pass1.value.length<8)
+            {
+                pass1.focus();
+                alert("Enter a password longer than 8 characters");
+                return false;
+            }
+
+            if (!(/\d/.test(pass1.value)))
+            {
+                pass1.focus();
+                alert("Password must contain a number");
+                return false;
+            }
+
+            if (pass1.value !== pass2.value)
+            {
+                pass1.focus();
+                alert("Your passwords do not match");
+                return false;
+            }
+        }
+    }
+</script>
+
+<!-- Footer-->
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SimpleLightbox plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+</body>
+
+
+
+
+<?php require('template/footer.phtml') ?>

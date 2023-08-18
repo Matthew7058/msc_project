@@ -1,0 +1,144 @@
+<!-- HEADER FOR index2.phtml (MOT BOOKING SITE) -->
+
+<?php
+$book = "My Bookings";
+$bookings = "history.php";
+
+if(isset($_SESSION["loggedin"]))
+{
+    $login = "Logout";
+
+    if(isset($_SESSION["admin"]))
+    {
+        $book = "All Bookings";
+        $bookings="timetable.php";
+    }
+}
+else {
+    $login = "Login";
+}
+
+$logo = '<img src="images/matts-cars.png" width="225" height="" alt="logo">';
+$logoFooter = '<img src="images/matts-cars.png" width="225" height="" alt="logo" class="footer-image">';
+$name = "GARAGE NAME";
+$primary = '#000000';
+$secondary = '#3a3aa4';
+
+if(isset($_SESSION['web-name']))
+{
+    $name = $_SESSION['web-name'];
+}
+
+if(isset($_SESSION['web-logo']))
+{
+    if($_SESSION['web-logo']=='bakestone.png')
+    {
+        $logo = '<label class="logo-text-display" style="color: '. $_SESSION['web-primary'] .'">'. $_SESSION['web-name'] .'</label><img src="images/'. $_SESSION['web-logo'] .'" width="55" height="" alt="logo" style="margin-top: -12px">';
+    }
+    else {
+        $logo = '<img src="images/'. $_SESSION['web-logo'] .'" width="95" height="" alt="logo" style="margin-top: -12px; margin-right: 12px"><label class="logo-text-display" style="color: '. $_SESSION['web-primary'] .'">'. $_SESSION['web-name'] .'</label>';
+    }
+    $logoFooter = '<label class="logo-text-display" style="color: '. $_SESSION['web-primary'] .'">'. $_SESSION['web-name'] .'</label><img src="images/'. $_SESSION['web-logo'] .'" width="95" height="" alt="logo" class="footer-image" style="margin-top: -12px">';
+}
+
+if(isset($_SESSION['web-primary']))
+{
+    $primary = $_SESSION['web-primary'];
+}
+
+if(isset($_SESSION['web-secondary']))
+{
+    $secondary = $_SESSION['web-secondary'];
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap grid -->
+    <link href="css/bootstrap-grid.css" rel="stylesheet">
+    <!-- Bootstrap reboot -->
+    <link href="css/bootstrap-reboot.css" rel="stylesheet">
+
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!-- My style -->
+    <link href="css/my-style2.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="js/bootstrap.bundle.js"></script>
+
+    <script src="js/bootstrap.js"></script>
+
+    <title><?php echo $name; ?></title>
+</head>
+
+<div id="content" class="col-xs-6 col-sm-9 col-md-10">
+
+    <nav class="navbar navbar-expand-lg navbar-light" id="my-navbar">
+        <!-- Link that takes you to index page -->
+        <a class="navbar-brand" id="my-brand" href="index2.php">
+            <!-- Image of logo shown on the left hand side of navbar -->
+            <?php echo $logo; ?>
+        </a>
+        <!-- button for navbar drop down when on mobile -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- All navbar links-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto" id="my-ul">
+                <!-- Home link to index page -->
+                <li class="nav-item" >
+                    <a class="nav-link" id="my-navlink" href="form.php" style="color: <?php echo $secondary;?>">Book an MOT<span class="sr-only">(current)</span></a>
+                </li>
+                <!-- Auctions link to auctions page -->
+                <li class="nav-item">
+                    <a class="nav-link" id="my-navlink" style="color: <?php echo $secondary;?>" href="<?php echo $bookings; ?>"><?php echo $book; ?></a>
+                </li>
+                <!-- Bidding list link to list page -->
+                <li class="nav-item">
+                    <a class="nav-link" id="my-navlink" style="color: <?php echo $secondary;?>" href="contact.php" >Contact Us</a>
+                </li>
+                <!-- Login link to login/ logout page -->
+                <li class="nav-item">
+                    <!-- Will echo login on logout depending on if the user is already logged in -->
+                    <a class="nav-link" id="my-navlink-last" style="background-color: <?php echo $primary;?>" href="login.php"><?php echo $login; ?></a>
+                </li>
+            </ul>
+
+            <!-- Form for search field -->
+            <!--<form class="form-inline my-2 my-lg-0" id="my-search" name="searchForm" method="post" action="viewSearch.php">-->
+                <!-- Search input text box -->
+                <!--<input class="form-control mr-sm-2" id="search" type="text" autocomplete="off" placeholder="Search" name="find">-->
+                <!-- Hidden paragraph to show ajax token session -->
+                <!--<p hidden id="ajaxToken"><?php //echo $_SESSION['ajaxToken']; ?></p>-->
+                <!-- Call to javascript file 'js/ajaxSearch.js' -->
+                <!--script src="js/ajaxSearch.js"></script>-->
+                <!-- Submit button for search box -->
+                <!--<input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="search" value="Search"</input>
+            </form>-->
+
+        </div>
+
+    </nav>
+
+    <!-- Div class for a row which will hold all the hint columns -->
+    <!--<div class="row" id="my-row">-->
+        <!-- Div class column where the hint text will go -->
+        <!--<div class="col-sm-3" id="txtHint"></div>-->
+        <!-- Div class column where the hint pictures will go -->
+        <!--<div class="col-sm-7" id="picHint"></div>-->
+        <!-- Div class column where the settings of the hints will go -->
+        <!--<div class="col-sm" id="settings"></div>-->
+        <!--</div>-->

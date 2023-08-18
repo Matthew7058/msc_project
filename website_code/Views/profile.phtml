@@ -1,0 +1,397 @@
+<?php require('template/header2.phtml') ?>
+
+<div class="shadow-lg mb-5 bg-white" id="my-shadow">
+    <h2 id="my-booking-title">My Profile</h2>
+    <div id="my-booking-box">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+            <div class="form-group" id="add-name">
+                <p onclick="addName()" style="cursor: pointer; color: #3a3aa4">+ Change my name</p>
+            </div>
+            <div class="form-group" id="change-name">
+            </div>
+
+            <div class="form-group" id="add-email">
+                <p onclick="addEmail()" style="cursor: pointer; color: #3a3aa4">+ Change my email</p>
+            </div>
+            <div class="form-group" id="change-email">
+            </div>
+
+            <div class="form-group" id="add-phone">
+                <p onclick="addPhone()" style="cursor: pointer; color: #3a3aa4">+ Change my phone number</p>
+            </div>
+            <div class="form-group" id="change-phone">
+            </div>
+
+            <div class="form-group" id="add-address">
+                <p onclick="addAddress()" style="cursor: pointer; color: #3a3aa4">+ Change my address</p>
+            </div>
+            <div class="form-group" id="change-address">
+            </div>
+
+            <div class="form-group" id="add-password">
+                <p onclick="addPassword()" style="cursor: pointer; color: #3a3aa4">+ Change my password</p>
+            </div>
+            <div class="form-group" id="change-password">
+            </div>
+
+            <?php
+
+            if(isset($_SESSION['admin']))
+            {
+                echo'
+                <h2 id="my-booking-title" style="padding-top: 0px;">My Website</h2>
+                <div class="form-group" id="add-web-name">
+                    <p onclick="addWebName()" style="cursor: pointer; color: #3a3aa4">+ Change my business/garage name</p>
+                </div>
+                <div class="form-group" id="change-web-name">
+                </div>
+    
+                <div class="form-group" id="add-web-email">
+                    <p onclick="addWebEmail()" style="cursor: pointer; color: #3a3aa4">+ Change my business email</p>
+                </div>
+                <div class="form-group" id="change-web-email">
+                </div>
+    
+                <div class="form-group" id="add-web-phone">
+                    <p onclick="addWebPhone()" style="cursor: pointer; color: #3a3aa4">+ Change my business phone number</p>
+                </div>
+                <div class="form-group" id="change-web-phone">
+                </div>
+    
+                <div class="form-group" id="add-web-address">
+                    <p onclick="addWebAddress()" style="cursor: pointer; color: #3a3aa4">+ Change my business/garage location(s)</p>
+                </div>
+                <div class="form-group" id="change-web-address">
+                </div>
+                
+                <div class="form-group" id="add-hours">
+                    <p onclick="addHours()" style="cursor: pointer; color: #3a3aa4">+ Change my opening hours</p>
+                </div>
+                <div class="form-group" id="change-hours">
+                </div>
+    
+                <div class="form-group" id="add-colour">
+                    <p onclick="addColour()" style="cursor: pointer; color: #3a3aa4">+ Change my colour scheme</p>
+                </div>
+                <div class="form-group" id="change-colour">
+                </div>
+                
+                <div class="form-group" id="add-image">
+                    <p onclick="addImage()" style="cursor: pointer; color: #3a3aa4">+ Change my images</p>
+                </div>
+                <div class="form-group" id="change-image">
+                </div>
+                
+                <div class="form-group" id="add-text">
+                    <p onclick="addText()" style="cursor: pointer; color: #3a3aa4">+ Change my main text</p>
+                </div>
+                <div class="form-group" id="change-text">
+                </div>
+                ';
+            }
+
+            ?>
+
+            <div class="form-group" style="margin-top: 30px">
+                <input type="submit" style="background-color: <?php echo $secondary; ?>" name="save" class="btnSubmit" id="my-check-button" value="Save" />
+            </div>
+            <div class="form-group" style="margin-top: 30px">
+                <input type="submit" style="background-color: <?php echo $secondary; ?>" name="delete" class="btnSubmit" id="my-check-button" value="Delete My Account" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php require('template/footer.phtml') ?>
+
+
+<script>
+function addName()
+{
+    document.getElementById("change-name").innerHTML =
+    '<div id="add-name-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="name" name="customer-name" placeholder="New Name *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-name").innerHTML =
+        '<p onclick="remove(\'add-name-input\', \'add-name\', \'Name\', \'Change my name\')" style="cursor: pointer; color: #3a3aa4">- Change my name</p>'
+
+}
+
+function addEmail()
+{
+    document.getElementById("change-email").innerHTML =
+    '<div id="add-email-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="email" name="customer-email" placeholder="New Email *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-email").innerHTML =
+        '<p onclick="remove(\'add-email-input\', \'add-email\', \'Email\',  \'Change my email\')" style="cursor: pointer; color: #3a3aa4">- Change my email</p>'
+
+}
+
+function addPhone()
+{
+    document.getElementById("change-phone").innerHTML =
+    '<div id="add-phone-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="phone" name="customer-phone" placeholder="New Phone Number *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-phone").innerHTML =
+        '<p onclick="remove(\'add-phone-input\', \'add-phone\', \'Phone\',  \'Change my phone number\')" style="cursor: pointer; color: #3a3aa4">- Change my phone number</p>'
+}
+
+function addAddress()
+{
+    document.getElementById("change-address").innerHTML =
+    '<div id="add-address-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="add1" name="customer-add1" placeholder="New Address Line 1 *" value="" />' +
+        '</div>' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="add2" name="customer-add2" placeholder="New Address Line 2 (Optional)" value="" />' +
+        '</div>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<input type="text" class="form-control-login2" id="city" name="customer-city" placeholder="New Town/City *" value="" />' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<input type="text" class="form-control-login2" id="postcode" name="customer-postcode" placeholder="New PostCode *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-address").innerHTML =
+        '<p onclick="remove(\'add-address-input\', \'add-address\', \'Address\',  \'Change my address\')" style="cursor: pointer; color: #3a3aa4">- Change my address</p>'
+}
+
+function addPassword()
+{
+    document.getElementById("change-password").innerHTML =
+    '<div id="add-password-input">' +
+        '<div class="form-group">' +
+            '<input type="password" class="form-control-login" id="pass1" name="password1" placeholder="New Password *" value="" />' +
+        '</div>' +
+        '<div class="form-group">' +
+            '<input type="password" class="form-control-login" id="pass2" name="password2" placeholder="Confirm New Password *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-password").innerHTML =
+        '<p onclick="remove(\'add-password-input\', \'add-password\', \'Password\',  \'Change my password\')" style="cursor: pointer; color: #3a3aa4">- Change my password</p>'
+}
+
+function addWebName()
+{
+    document.getElementById("change-web-name").innerHTML =
+    '<div id="add-web-name-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="web-name" name="web-name" placeholder="New Garage/Business Name *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-web-name").innerHTML =
+    '<p onclick="remove(\'add-web-name-input\', \'add-web-name\', \'WebName\', \'Change my business/garage name\')" style="cursor: pointer; color: #3a3aa4">- Change my business/garage name</p>'
+
+}
+
+function addWebEmail()
+{
+    document.getElementById("change-web-email").innerHTML =
+    '<div id="add-web-email-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="web-email" name="web-email" placeholder="New Business Email *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-web-email").innerHTML =
+        '<p onclick="remove(\'add-web-email-input\', \'add-web-email\', \'WebEmail\',  \'Change my business email\')" style="cursor: pointer; color: #3a3aa4">- Change my business email</p>'
+
+}
+
+function addWebPhone()
+{
+    document.getElementById("change-web-phone").innerHTML =
+    '<div id="add-web-phone-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="web-phone" name="web-phone" placeholder="New Business Phone Number *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-web-phone").innerHTML =
+        '<p onclick="remove(\'add-web-phone-input\', \'add-web-phone\', \'WebPhone\',  \'Change my business phone number\')" style="cursor: pointer; color: #3a3aa4">- Change my business phone number</p>'
+}
+
+function addWebAddress()
+{
+    document.getElementById("change-web-address").innerHTML =
+    '<div id="add-web-address-input">' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="web-add1" name="web-add1" placeholder="New Address Line 1 *" value="" />' +
+        '</div>' +
+        '<div class="form-group">' +
+            '<input type="text" class="form-control-login" id="web-add2" name="web-add2" placeholder="New Address Line 2 (Optional)" value="" />' +
+        '</div>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<input type="text" class="form-control-login2" id="web-city" name="web-city" placeholder="New Town/City *" value="" />' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<input type="text" class="form-control-login2" id="web-postcode" name="web-postcode" placeholder="New PostCode *" value="" />' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-web-address").innerHTML =
+        '<p onclick="remove(\'add-web-address-input\', \'add-web-address\', \'WebAddress\',  \'Change my business/garage location(s)\')" style="cursor: pointer; color: #3a3aa4">- Change my business/garage location(s)</p>'
+}
+
+function addHours()
+{
+    document.getElementById("change-hours").innerHTML =
+    '<div id="add-hours-input">' +
+        '<p>Monday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="monopen" name="mon-open" onchange="monClosed(value,1)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="monclose" name="mon-close" onchange="monClosed(value,0)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<p>Tuesday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="tueopen" name="tue-open" onchange="monClosed(value,3)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="tueclose" name="tue-close" onchange="monClosed(value,2)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<p>Wednesday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="wedopen" name="wed-open" onchange="monClosed(value,5)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="wedclose" name="wed-close" onchange="monClosed(value,4)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<p>Thursday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="thursopen" name="thurs-open" onchange="monClosed(value,7)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="thursclose" name="thurs-close" onchange="monClosed(value,6)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<p>Friday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="friopen" name="fri-open" onchange="monClosed(value,9)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="friclose" name="fri-close" onchange="monClosed(value,8)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<p>Saturday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="satopen" name="sat-open" onchange="monClosed(value,11)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="satclose" name="sat-close" onchange="monClosed(value,10)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<p>Sunday</p>' +
+        '<div class="form-group" id="my-left-form-box">' +
+            '<select class="form-control-login3" id="sunopen" name="sun-open" onchange="monClosed(value,13)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box">' +
+            '<select class="form-control-login3" id="sunclose" name="sun-close" onchange="monClosed(value,12)">' +
+                '<option value="select">Open</option><option value = "25">CLOSED</option><option value = "0">00:00</option><option value = "1">01:00</option><option value = "2">02:00</option><option value = "3">03:00</option><option value = "4">04:00</option><option value = "5">05:00</option><option value = "6">06:00</option><option value = "7">07:00</option><option value = "8">08:00</option><option value = "9">09:00</option><option value = "10">10:00</option><option value = "11">11:00</option><option value = "12">12:00</option><option value = "13">13:00</option><option value = "14">14:00</option><option value = "15">15:00</option><option value = "16">16:00</option><option value = "17">17:00</option><option value = "18">18:00</option><option value = "19">19:00</option><option value = "20">20:00</option><option value = "21">21:00</option><option value = "22">22:00</option><option value = "23">23:00</option>'+
+            '</select>' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-hours").innerHTML =
+        '<p onclick="remove(\'add-hours-input\', \'add-hours\', \'Hours\',  \'Change my opening hours\')" style="cursor: pointer; color: #3a3aa4">- Change my opening hours</p>'
+}
+
+function addColour()
+{
+    document.getElementById("change-colour").innerHTML =
+    '<div id="add-colour-input">' +
+        '<div class="form-group" id="my-left-form-box2" style="margin-bottom: 40px">' +
+            '<input type="color" id="head" name="primary"' +
+                   'value="#000000" style="width: 20%;" onchange="changePrimaryColour(this.value)">' +
+                '<label for="head">Primary Colour</label>' +
+        '</div>'+
+        '<div class="form-group" id="my-right-form-box2" style="margin-bottom: 40px">' +
+            '<input type="color" id="head" name="secondary"' +
+                   'value="#3a3aa4" id="secondary-color" style="width:20%;" onchange="changeSecondaryColour(this.value)">' +
+                '<label for="head">Secondary Colour</label>' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-colour").innerHTML =
+        '<p onclick="remove(\'add-colour-input\', \'add-colour\', \'Colour\',  \'Change my colour scheme\')" style="cursor: pointer; color: #3a3aa4">- Change my colour scheme</p>'
+}
+
+function addImage()
+{
+    document.getElementById("change-image").innerHTML =
+    '<div id="add-image-input">' +
+        '<div class="form-group" id="my-left-form-box2">' +
+            '<p id="my-navlink2"><i class="fa fa-pencil"></i> Add Your Logo</p>' +
+            '<input type="hidden" name="hidden-logo" id="hidden-logo" value="default">' +
+        '</div>' +
+        '<div class="form-group" id="my-right-form-box2">' +
+            '<p id="my-navlink3"><i class="fa fa-pencil"></i> Add Your Main Image</p>' +
+            '<input type="file" id="image_input" name="fileToUpload" accept="image/*" style="display: none">' +
+            '<input type="hidden" name="hidden-image" id="hidden-image" value="default">' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-image").innerHTML =
+        '<p onclick="remove(\'add-image-input\', \'add-image\', \'Image\',  \'Change my images\')" style="cursor: pointer; color: #3a3aa4">- Change my images</p>'
+}
+
+function addText()
+{
+    document.getElementById("change-text").innerHTML =
+    '<div id="add-text-input">' +
+        '<div class="form-group">' +
+            '<textarea type="text" rows="5" cols="50" class="form-control" name="paragraphText" id="my-login-input" maxlength="999" placeholder="With over 40 years of experience, we offer a friendly and professional service, so that you can have peace of mind. All work carried out by our qualified mechanics are to the highest standard. Our MOTs are £29 for bikes and £50 for cars. We also offer a free courtesy car, or a free collection and delivery service." value="" /></textarea>' +
+        '</div>' +
+    '</div>';
+
+    document.getElementById("add-text").innerHTML =
+        '<p onclick="remove(\'add-text-input\', \'add-text\', \'Text\',  \'Change my main text\')" style="cursor: pointer; color: #3a3aa4">- Change my main text</p>'
+}
+
+function remove(id, id2, functionName, text)
+{
+    document.getElementById(id).innerHTML = '';
+    document.getElementById(id2).innerHTML =
+        '<p onclick="add'+functionName+'()" style="cursor: pointer; color: #3a3aa4">+ '+ text +'</p>'
+}
+</script>

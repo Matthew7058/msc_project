@@ -1,0 +1,20 @@
+<?php require('template/header2.phtml') ?>
+
+<div class="container">
+    <div class="row" id="hint-row">
+        <div class="col-sm">
+            <div id="index-left">
+                <h1 id="my-heading" style="color: <?php echo ($_SESSION['web-primary']);?>">WELCOME TO <?php echo strtoupper($_SESSION['web-name']);?></h1>
+                <p class="paragraph-2" id="my-index-paragraph"><?php echo ($_SESSION['web-text']);?></p>
+                <a href="form.php" id="my-book-mot-link" style="background-color: <?php echo ($_SESSION['web-secondary']);?>">Book your MOT today!</a>
+                <br><br><br><a href="https://3adkws2etd.execute-api.us-east-1.amazonaws.com" target="_blank" id="my-book-mot-link" style="background-color: <?php echo ($_SESSION['web-secondary']);?>">Try the MOT Predictor (Beta)</a>
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <img style="height: 90%" src="images/<?php echo $_SESSION['web-image'];?>" width="100%">
+        </div>
+    </div>
+</div>
+
+<?php require('template/footer2.phtml') ?>

@@ -1,0 +1,466 @@
+<?php require('template/header.phtml') ?>
+
+<body>
+
+    <!-- About-->
+    <section class="page-section bg-primary" id="about" style="height: 100vh; padding-top: 200px">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">Thanks for Signing Up! Let's Get Started</h2>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-75 mb-4">You'll need 10 minutes of time and will need to know details about your garage, such as location and opening hours.<br><br>First press the button below to begin. Then, complete each section and press 'next' once you are happy. Don't worry, all details can be altered at a later date.</p>
+                    <hr class="divider divider-light" />
+                    <a class="btn btn-light btn-xl" href="#garage_details">Click here to begin</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Step 1-->
+    <section class="page-section" id="garage_details" style="minimum-height: 100vh; max-width: 1000px; margin: auto">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">Step 1</h2>
+                    <hr class="divider" />
+                    <p class="text-muted mb-5">Ready to take your garage to the next step? Create an account my filling in your personal details below.</p>
+                </div>
+            </div>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSiiRWYXgXQhRMcKEfFsX7vQgen8K-QLI&libraries=places"></script>
+
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <form id="detailsForm" method="post" action="customiser.php" onsubmit="return validate_form(this);">
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" name="name" type="text" placeholder="Garage Name..." data-sb-validations="required" />
+                        <label for="name">Garage name</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                    </div>
+                    <!-- Email address input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                        <label for="email">Business email address</label>
+                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                    </div>
+                    <!-- Phone number input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="number" name="number" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                        <label for="phone">Business phone number</label>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    </div>
+                    <!-- MOTs per hour input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="freq" name="freq" type="number" min="1" placeholder="1" data-sb-validations="required" />
+                        <label for="phone">Number of MOTs that can be done at one time</label>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    </div>
+                    <!-- Address input-->
+                    <div class="form-floating mb-3">
+                        <div id="locationField">
+                            <input class="form-control" id="autocomplete" name="address" type="text" placeholder="Garage Address" style="height: 4rem" data-sb-validations="required"/>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">An address is required.</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" >
+                        <p onclick="addLocation()" style="cursor: pointer; color: #3a3aa4">+ Add another branch location</p>
+                    </div>
+                    <div id="second">
+                    <div id="alt-location">
+
+                    </div>
+                    </div>
+                    <hr class="divider" />
+
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="d-grid"><a class="btn btn-primary btn-xl" style="margin: auto; padding-left: 10%; padding-right: 10%" href="#opening_hours">Next</a></div>
+                <!--</form>-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="page-section" id="opening_hours" style="minimum-height: 100vh; max-width: 1000px; margin: auto">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">Step 2</h2>
+                    <hr class="divider" />
+                    <p class="text-muted mb-5">Ready to take your garage to the next step? Create an account my filling in your personal details below.</p>
+                </div>
+            </div>
+
+
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSiiRWYXgXQhRMcKEfFsX7vQgen8K-QLI&libraries=places"></script>
+
+            <!--<div class="row gx-4 gx-lg-5 justify-content-center mb-5">-->
+            <div style="max-width: 800px; margin: auto; position: relative">
+                <!--<form id="hoursForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">-->
+                    <!-- Name input-->
+
+                        <div class="form-floating mb-3" style="float: left; width: 40%; margin: auto">
+                            <input class="form-control" id="monopen" name="mon-open" type="time" placeholder="Garage Name..." data-sb-validations="required" />
+                            <label for="name">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <label style="width: 20%; margin-bottom: 35px; text-align: center">Monday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="mon-check" onclick="toggleMon()" checked>
+                                <label class="form-check-label" id="mon-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+                        <!-- Email address input-->
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="monclose" name="mon-close" type="time" placeholder="name@example.com" data-sb-validations="required,email" />
+                            <label for="email">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3" style="float: left; width: 40%; margin: auto">
+                            <input class="form-control" id="tueopen" name="tue-open" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <label style="width: 20%; margin-bottom: 35px; text-align: center">Tuesday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="tue-check" onclick="toggleTue()" checked>
+                                <label class="form-check-label" id="tue-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="tueclose" name="tue-close" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3" style="float: left;; width: 40%; margin: auto">
+                            <input class="form-control" id="wedopen" name="wed-open" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <label style="width: 20%; text-align: center; margin-bottom: 35px">Wednesday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="wed-check" onclick="toggleWed()" checked>
+                                <label class="form-check-label" id="wed-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="wedclose" name="web-close" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3" style="float: left; width: 40%; margin: auto">
+                            <input class="form-control" id="thursopen" name="thurs-open" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <label style="width: 20%; text-align: center; margin-bottom: 35px">Thursday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="thurs-check" onclick="toggleThurs()" checked>
+                                <label class="form-check-label" id="thurs-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="thursclose" name="thurs-close" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3" style="float: left; width: 40%; margin: auto">
+                            <input class="form-control" id="friopen" name="fri-open" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <label style="width: 20%; text-align: center; margin-bottom: 35px">Friday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="fri-check" onclick="toggleFri()" checked>
+                                <label class="form-check-label" id="fri-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="friclose" name="fri-close" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3" style="float: left; width: 40%; margin: auto">
+                            <input class="form-control" id="satopen" name="sat-open" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <label style="width: 20%; text-align: center; margin-bottom: 35px">Saturday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="sat-check" onclick="toggleSat()" checked>
+                                <label class="form-check-label" id="sat-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="satclose" name="sat-close" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3" style="float: left; width: 40%; margin: auto">
+                            <input class="form-control" id="sunopen" name="sun-open" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Opening</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <label style="width: 20%; text-align: center; margin-bottom: 35px">Sunday<br><div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="sun-check" onclick="toggleSun()" checked>
+                                <label class="form-check-label" id="sun-check-label" for="flexSwitchCheckChecked">Open</label>
+                            </div></label>
+                        <div class="form-floating mb-3" style="float: right; width: 40%; margin: auto">
+                            <input class="form-control" id="sunclose" name="sun-close" type="time" placeholder="(123) 456-7890" data-sb-validations="required" />
+                            <label for="phone">Closing</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+
+                    <hr class="divider" />
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="d-grid"><input style="width: 225px; margin: auto; position: relative" class="btn btn-primary btn-xl" id="submitButton" name="step2" type="submit" value="Next"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer-->
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SimpleLightbox plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+</body>
+
+<!-- Add Location JS -->
+<script>
+    function addLocation()
+    {
+        document.getElementById("alt-location").innerHTML +=
+            '<div class="form-floating mb-3">'+
+            '<input class="form-control" id="number" name="number1" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />' +
+            '<label for="phone">Secondary garage phone number</label>' +
+            '<div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>' +
+            '</div>' +
+            '<div class="form-floating mb-3">' +
+                '<input class="form-control" id="freq" name="freq" type="number" min="1" placeholder="1" data-sb-validations="required" />' +
+                '<label for="phone">Number of MOTs that can be done at one time</label>' +
+                '<div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>' +
+            '</div>' +
+            '<div class="form-floating mb-3">' +
+            '<div id="locationField">' +
+            '<input class="form-control" id="autocomplete2" name="address1" type="text" placeholder="Second Garage Address" style="height: 4rem" data-sb-validations="required"/>' +
+            '<div class="invalid-feedback" data-sb-feedback="message:required">An address is required.</div>' +
+            '</div>' +
+            '</div>'+
+            '<div class="form-group">' +
+            '<p onclick="removeLocation()" style="cursor: pointer; color: #3a3aa4">- Remove this location</p>' +
+            '</div>' +
+            '</div>';
+
+        const autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('autocomplete2'), {componentRestrictions: {country: 'uk'}}
+        );
+
+        autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+    }
+
+    function removeLocation()
+    {
+        document.getElementById("second").innerHTML = '<div id="alt-location"></div>';
+    }
+
+</script>
+
+<!-- Google Autocomplete Location JS -->
+<script>
+    function initAutocomplete() {
+        const autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('autocomplete'), {componentRestrictions: {country: 'uk'}}
+        );
+
+        autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initAutocomplete);
+</script>
+
+<!-- Closed Days JS -->
+<script>
+    function toggleMon() {
+        var open = document.getElementById("monopen")
+        var close = document.getElementById("monclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("mon-check-label")
+        if(label.innerText=="Open")
+        {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        }
+        else{
+            label.innerText="Open"
+        }
+    }
+    function toggleTue() {
+        var open = document.getElementById("tueopen")
+        var close = document.getElementById("tueclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("tue-check-label")
+        if(label.innerText=="Open")
+        {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        }
+        else{
+            label.innerText="Open"
+        }
+    }
+    function toggleWed() {
+        var open = document.getElementById("wedopen")
+        var close = document.getElementById("wedclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("wed-check-label")
+        if(label.innerText=="Open") {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        } else {
+            label.innerText="Open"
+        }
+    }
+
+    function toggleThurs() {
+        var open = document.getElementById("thursopen")
+        var close = document.getElementById("thursclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("thurs-check-label")
+        if(label.innerText=="Open") {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        } else {
+            label.innerText="Open"
+        }
+    }
+
+    function toggleFri() {
+        var open = document.getElementById("friopen")
+        var close = document.getElementById("friclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("fri-check-label")
+        if(label.innerText=="Open") {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        } else {
+            label.innerText="Open"
+        }
+    }
+
+    function toggleSat() {
+        var open = document.getElementById("satopen")
+        var close = document.getElementById("satclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("sat-check-label")
+        if(label.innerText=="Open") {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        } else {
+            label.innerText="Open"
+        }
+    }
+
+    function toggleSun() {
+        var open = document.getElementById("sunopen")
+        var close = document.getElementById("sunclose")
+        open.disabled = !(open.disabled);
+        close.disabled = !(close.disabled);
+        var label = document.getElementById("sun-check-label")
+        if(label.innerText=="Open") {
+            label.innerText="Closed"
+            open.value = null
+            close.value = null
+        } else {
+            label.innerText="Open"
+        }
+    }
+
+</script>
+
+<!-- Form Validation JS -->
+<script>
+    function validate_form(thisForm) {
+        with(thisForm) {
+
+            if(name.value=="" || email.value=="" || address.value=="")
+            {
+                alert("Please fill in all required fields")
+                return false;
+            }
+
+            const days = ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'];
+
+            for (const day of days) {
+                let openTime = document.getElementById(day + "open").value;
+                let closeTime = document.getElementById(day + "close").value;
+
+                // If the closing time is before the opening time or they're equal
+                if ((closeTime <= openTime) && document.getElementById(day + "-check-label").innerText != "Closed") {
+                    alert(day.charAt(0).toUpperCase() + day.slice(1) + " error: Either missing value or closing time must be after opening time!");
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+</script>
+
+
+<?php require('template/footer.phtml') ?>

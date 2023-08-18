@@ -1,0 +1,557 @@
+<?php require('template/header2.phtml') ?>
+
+<div class="calendar">
+
+    <div class="col leftCol" style="background-color: <?php echo ($_SESSION['web-primary']);?>">
+        <div class="content">
+            <h1 class="date" id="date">Monday<span id="current-date-selected">15th August 2023</span></h1>
+            <p hidden id="userID"><?php echo $_SESSION['user'][0]; ?></p>
+            <p hidden id="userName"><?php echo $_SESSION['user'][1]; ?></p>
+            <p hidden id="role"><?php echo $_SESSION['user'][2]; ?></p>
+            <div class="notes">
+                <?php
+                if ($_SESSION['role'] == "Manager")
+                {
+                    echo '
+                    <p id="new-shift" style="cursor: pointer" onclick="showModal()">
+                        <input placeholder="New shift"/>
+                        <a href="#" title="Add note" class="addNote animate">+</a>
+                    </p>';
+                }
+
+                ?>
+                <ul class="noteList" id="noteList">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col rightCol">
+        <div class="content">
+            <h1 class="owner"><?php echo $_SESSION['web-name']; ?>'s Schedule</h1>
+            <h2 class="year" id="year">2023 <span onclick="increaseYear()" style="cursor: pointer">&#8679;</span><span onclick="decreaseYear()" style="cursor: pointer">&#8681;</span></h2>
+            <ul class="months">
+                <li><a href="#" title="January" data-value="1" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Jan</a></li>
+                <li><a href="#" title="February" data-value="2" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Feb</a></li>
+                <li><a href="#" title="March" data-value="3" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Mar</a></li>
+                <li><a href="#" title="April" data-value="4" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Apr</a></li>
+                <li><a href="#" title="May" data-value="5" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">May</a></li>
+                <li><a href="#" title="June" data-value="6" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Jun</a></li>
+                <li><a href="#" title="July" data-value="7" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Jul</a></li>
+                <li><a href="#" title="August" data-value="8" class="selected" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Aug</a></li>
+                <li><a href="#" title="September" data-value="9" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Sep</a></li>
+                <li><a href="#" title="October" data-value="10"onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`), onMonthClick()">Oct</a></li>
+                <li><a href="#" title="November" data-value="11"onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Nov</a></li>
+                <li><a href="#" title="December" data-value="12" onclick="selectMonth(this.title), onMonthClick(), this.classList.toggle(`selected`)">Dec</a></li>
+            </ul>
+
+
+            <div class="clearfix"></div>
+            <ul class="weekday">
+                <li><a href="#" title="Monday" data-value="1">Mon</a></li>
+                <li><a href="#" title="Tuesday" data-value="2">Tue</a></li>
+                <li><a href="#" title="Wednesday" data-value="3">Wed</a></li>
+                <li><a href="#" title="Thursday" data-value="4">Thu</a></li>
+                <li><a href="#" title="Friday" data-value="5">Fri</a></li>
+                <li><a href="#" title="Saturday" data-value="6">Sat</a></li>
+                <li><a href="#" title="Sunday" data-value="7">Sun</a></li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="days" id="days">
+
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" id="removeShift">
+                    <input type="submit" style="visibility: hidden" id="remove">
+                </form>
+                <script>
+
+                    var oldNumber = new Date().getDate()
+                    var oldMonth = 'August'
+                    var oldDay = 'Monday'
+                    var oldYear = 2023
+
+                    var dt
+                    var firstDayOfTheMonth
+                    var daysInMonth
+
+                    var weekday=new Array(7);
+                    weekday[0]="Sunday";
+                    weekday[1]="Monday";
+                    weekday[2]="Tuesday";
+                    weekday[3]="Wednesday";
+                    weekday[4]="Thursday";
+                    weekday[5]="Friday";
+                    weekday[6]="Saturday";
+                    weekday[7]="Sunday";
+
+                    var shiftsInMonth = [];
+
+                    let userID = document.getElementById("userID").innerText
+                    let userName = document.getElementById("userName").innerText
+
+
+                    function getMonthFromString(month){
+                        return new Date(Date.parse(month +" 1, 2012")).getMonth()
+                    }
+
+                    function checkFirstDay() {
+                        dt = new Date(oldYear, getMonthFromString(oldMonth), 1);
+                        firstDayOfTheMonth = dt.getDay()
+
+                        // Makes Sunday day 7 instead of day 0
+                        if (firstDayOfTheMonth == 0)
+                        {
+                            firstDayOfTheMonth = 7
+                        }
+
+                        oldDay = weekday[firstDayOfTheMonth]
+
+                        while (firstDayOfTheMonth >= 2)
+                        {
+                            document.getElementById("days").innerHTML += '<li><a href="#"></li>';
+                            firstDayOfTheMonth -= 1;
+                        }
+                    }
+
+                    function checkDaysInMonth() {
+                        daysInMonth = new Date(oldYear, getMonthFromString(oldMonth)+1, 0).getDate()
+                    }
+
+                    function clearCalendar() {
+                        document.getElementById("days").innerHTML = "";
+                    }
+
+
+                    function loadCalendar() {
+                        for( var _i = 1; _i <= daysInMonth; _i += 1 ) {
+                            var _addClass = '';
+                            if( _i === oldNumber ){ _addClass = ' class="selected" '; }
+
+                            /*switch( _i ){
+                                case 8:
+                                case 10:
+                                case 27:
+                                    _addClass = ' class="event"';
+                                    break;
+                            }*/
+
+                            document.getElementById("days").innerHTML += '<li><a href="#" title="'+_i+'" data-value="'+_i+'"'+_addClass+' onclick="selectDate(this.title), this.classList.toggle(`selected`)">'+_i+'</a></li>'
+
+                        }
+
+                    }
+
+                    checkFirstDay()
+                    checkDaysInMonth()
+                    loadCalendar()
+
+
+                    //var poop = document.getElementById("12").title
+
+                    var shiftsInMonth = <?php echo json_encode($view->dates); ?>;
+                    var timesInMonth = <?php echo json_encode($view->times); ?>;
+                    var namesInMonth = <?php echo json_encode($view->names); ?>;
+                    var locationsInMonth = <?php echo json_encode($view->locations); ?>;
+                    var emailsInMonth = <?php echo json_encode($view->email); ?>;
+                    var phonesInMonth = <?php echo json_encode($view->phone); ?>;
+                    var addressInMonth = <?php echo json_encode($view->address); ?>;
+                    var idsInMonth = <?php echo json_encode($view->ids); ?>;
+
+
+                    function selectDate(number)
+                    {
+                        shiftsInMonth = <?php echo json_encode($view->dates); ?>;
+                        timesInMonth = <?php echo json_encode($view->times); ?>;
+                        namesInMonth = <?php echo json_encode($view->names); ?>;
+                        locationsInMonth = <?php echo json_encode($view->locations); ?>;
+                        emailsInMonth = <?php echo json_encode($view->email); ?>;
+                        phonesInMonth = <?php echo json_encode($view->phone); ?>;
+                        addressInMonth = <?php echo json_encode($view->address); ?>;
+                        idsInMonth = <?php echo json_encode($view->ids); ?>;
+                        //alert(shiftsInMonth.length)
+                        //oldDay = new Date(oldYear, oldMonth, number).getDay()
+
+                        dt = new Date(oldYear, getMonthFromString(oldMonth), number);
+                        oldDay = weekday[dt.getDay()]
+
+                        document.getElementById('date').innerHTML = '<h1 class="date" id="date">' + oldDay + "<span id='current-date-selected'>" + number + " " + oldMonth + " " + oldYear + "</span></h1>"
+                        document.querySelector('[title="'+oldNumber+'"]').classList.remove("selected")
+                        //document.querySelector('[title=oldNumber]').innerHTML = '<p>oldNumber</p>'
+                        dt = new Date(oldYear, getMonthFromString(oldMonth), number);
+                        //document.getElementById("day")
+
+                        //saveOldDay(dt)
+                        saveOldNumber(number)
+
+                        //alert(shiftsInMonth.length)
+
+                        document.getElementById("noteList").innerHTML = ''
+
+                        var i =0
+                        while(i<shiftsInMonth.length)
+                        {
+                            var DatesWithShifts = new Date(shiftsInMonth[i]).getDate()
+                            var curMonth = new Date(shiftsInMonth[i]).getMonth()
+                            if (number == DatesWithShifts && curMonth == getMonthFromString(oldMonth) )
+                            {
+                                document.getElementById("noteList").innerHTML += '<li style="cursor: pointer" ><b style="font-size: large"onclick="showModal('+timesInMonth[i]+',`'+namesInMonth[i]+'`,`'+locationsInMonth[i]+'`,`'+shiftsInMonth[i]+'`,`'+emailsInMonth[i]+'`,`'+phonesInMonth[i]+'`,`'+addressInMonth[i]+'`,'+idsInMonth[i]+')">' + timesInMonth[i]+':00 - ' +namesInMonth[i]+ ' ('+locationsInMonth[i]+')</b></li>'
+
+
+                                //document.getElementById("noteList").innerHTML += '<li onclick="this.style.textDecoration = `line-through`">'+shiftsInMonth[i][3]+' ' +shiftsInMonth[i][1]+' - ' +shiftsInMonth[i][2]+ '<a href="#" title="Remove note" class="removeNote animate" id="x" onclick="removeShift('+ shiftsInMonth[i][5] +')">x</a></li>'
+                            }
+                            i++
+                        }
+                    }
+
+                    function saveOldNumber(number)
+                    {
+                        oldNumber = number
+                    }
+
+                    function selectMonth(month)
+                    {
+                        document.getElementById('date').innerHTML = '<h1 class="date" id="date">' + oldDay + "<span id='current-date-selected'>" + oldNumber + "TH " + month + " " + oldYear + "</span></h1>"
+                        document.querySelector('[title="'+oldMonth+'"]').classList.remove("selected")
+                        shiftsInMonth = []
+                        saveOldMonth(month)
+                    }
+
+                    function saveOldMonth(month)
+                    {
+                        oldMonth = month
+                        reloadCalender()
+                    }
+
+                    function increaseYear()
+                    {
+                        year = oldYear + 1
+                        document.getElementById('year').innerHTML = year + ' <span onclick="increaseYear()" style="cursor: pointer">&#8679;</span><span onclick="decreaseYear()" style="cursor: pointer">&#8681;</span>'
+                        saveOldYear(year)
+                    }
+
+                    function decreaseYear()
+                    {
+                        year = oldYear - 1
+                        document.getElementById('year').innerHTML = year + ' <span onclick="increaseYear()" style="cursor: pointer">&#8679;</span><span onclick="decreaseYear()" style="cursor: pointer">&#8681;</span>'
+                        saveOldYear(year)
+                    }
+
+                    function saveOldYear(year)
+                    {
+                        oldYear = year
+                        reloadCalender()
+                    }
+
+                    function reloadCalender()
+                    {
+                        clearCalendar()
+                        checkFirstDay()
+                        checkDaysInMonth()
+                        loadCalendar()
+                    }
+
+                </script>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="clearfix"></div>
+
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <h2 id="my-booking-title3"><span style="font-size: 65%" id="time">13:00</span><br><div id="name">Matthew Fard</div></h2>
+        <div id="my-booking-box">
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <div class="form-group" style="margin-bottom: 0px">
+                    <p id="location">Stockport Garage</p>
+                </div>
+                <div class="form-group" style="margin-bottom: 0px">
+                    <p id="date2">01/08/2023</p>
+                </div>
+                <div class="form-group" style="margin-bottom: 0px">
+                    <p id="email">matthewfard@me.com</p>
+                </div>
+                <div class="form-group" style="margin-bottom: 0px">
+                    <p id="reg">FD09 XYK</p>
+                </div>
+                <div class="form-group" style="margin-bottom: 0px">
+                    <p id="address">Address</p>
+                </div>
+                <input type="hidden" id="bookId" name="bookId">
+                <input type="submit" name="delete-booking" style="cursor: pointer" value="Delete booking">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var eventDates = <?php echo json_encode($view->dates); ?>;
+    function onMonthClick() {
+        let selectedMonthNumber = getMonthFromString(oldMonth);
+        let selectedYearNumber = getMonthFromString(oldYear);
+        eventDates.forEach(function(date) {
+            let currentEventDate = new Date(date);
+
+            if (currentEventDate.getMonth() === selectedMonthNumber) {  // Only proceed if it's the selected month
+                let currentEventDay = currentEventDate.getDate();
+
+                // Note: Make sure the selector '[title="'+currentEventDay+'"]' is selecting the correct elements.
+                document.querySelector('[title="'+currentEventDay+'"]').classList.add('event');
+            }
+        });
+    }
+
+    selectMonth("August");
+    onMonthClick();
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    function showModal(time,name,location,date,email,reg,address,id) {
+        //var dateText = document.getElementById("current-date-selected").textContent
+        //document.getElementById("selected-date").innerText = dateText
+        monthNumber = getMonthFromString(oldMonth)
+        var dateText = oldNumber + "-" + (monthNumber + 1) + "-" + oldYear
+        var dateTextSQL = oldYear + "-" + (monthNumber + 1) + "-" + oldNumber
+        document.getElementById('time').innerText = time +":00"
+        document.getElementById("name").innerText = name
+        document.getElementById("location").innerText = location
+        document.getElementById("date2").innerText = date
+        document.getElementById("email").innerText = email
+        document.getElementById("reg").innerText = reg
+        document.getElementById("address").innerText = address
+        document.getElementById("bookId").value = id
+
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+    /*
+    // AJAX Connection
+
+    let xmlhttp = null;
+    let xmlhttp2 = null;
+
+    function onMonthClick() {
+        // xmlhttp variable set to new XMLHttpRequest object
+        xmlhttp = new XMLHttpRequest();
+
+
+
+        xmlhttp.onreadystatechange = function() {
+
+
+            // if connected to xmlhttp server correctly
+            if (this.readyState == 4 && this.status == 200) {
+                //let cars = JSON.parse(this.responseText);
+                let shifts = JSON.parse(this.responseText);
+
+                shifts.forEach(function (obj) {
+                    shiftsInMonth.push(obj)
+                    //alert(shifts[0][2])
+                    //alert("done")
+                    var currentShiftDate = new Date(obj[0])
+                    var currentShiftDay = currentShiftDate.getDate()
+                    //alert(obj[0])
+                    //alert(currentShiftDate.getDate())
+                    if(obj[3] == userName)
+                    {
+                        document.querySelector('[title="'+currentShiftDay+'"]').classList.add('event')
+                    }
+
+                });
+            }
+        }
+
+        // Sends the user input string - str - the token and the number of items to load to the xmlhttp server
+        xmlhttp.open("GET", "Ajax/ajaxShifts.php?month=" + getMonthFromString(oldMonth) + "&year=" + oldYear + "&id=" + userID, true);
+        xmlhttp.send();
+
+        return;
+
+    };
+
+    selectMonth("August")
+    onMonthClick()
+
+
+     */
+    function removeShift(id)
+    {
+
+        if (confirm("Are you sure you want to remove this shift?") == true) {
+            xmlhttp2 = new XMLHttpRequest();
+
+            // Sends the user input string - str - the token and the number of items to load to the xmlhttp server
+            xmlhttp2.open("GET", "Ajax/ajaxShifts.php?shiftId=" + id, true);
+            xmlhttp2.send();
+
+            return;
+        }
+    };
+
+    //document.getElementById("sept").addEventListener('click', onMonthClick, false);
+
+
+
+
+
+</script>
+
+
+<?php
+/*
+if (isset($_SESSION["admin"]))
+{
+    echo'
+    <div class="shadow-lg mb-5 bg-white" id="my-shadow">
+        <h2 id="my-booking-title" style="color: '.$primary.'">View All Bookings</h2>
+        <div id="my-booking-box">
+            <form method="post" action="'.$_SERVER['PHP_SELF'].'" onsubmit="return validate_form(this);">
+                <div class="form-group" id="my-left-form-box">
+                    <input type="date" name="date" min="'. date("Y-m-d") .'" class="form-control-login" id="datepicker" placeholder="dd/mm/yyyy" value="" />
+                </div>
+                <div class="form-group" id="my-right-form-box">
+                    <select class="form-control-login" id="location" name="location">
+                        <option value="select">All Locations</option>
+                        <option value = "'.$_SESSION["currentWebsiteLocation"][0][1].'">'.$_SESSION["currentWebsiteLocation"][0][1].'</option>
+                        <option value = "'.$_SESSION["currentWebsiteLocation"][1][1].'">'.$_SESSION["currentWebsiteLocation"][1][1].'</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 30px">
+                    <input type="submit" class="btnSubmit" style="background: '.$secondary.'" id="my-check-button" name="find" value="Find Bookings" />
+                </div>
+            </form>
+        </div>
+    </div>';
+
+    if(isset($_POST["find"]))
+    {
+        echo'
+        <div class="shadow-lg mb-5 bg-white" id="my-shadow">
+            <h2 id="my-booking-title">'.$view->date.'</h2>
+            <div id="my-booking-box">';
+
+            foreach ($view->bookingData as $bookData) {
+                $bookID = $bookData->getBookingID();
+                $date = $bookData->getDate();
+                $userData->fetchUser($bookData->getUserID());
+                $newDate = date("d-m-Y", strtotime($date));
+                $req = "";
+                $em = "";
+                $pho = "";
+                $add = "";
+                if($bookData->getOtherReq() != "")
+                {
+                    $req = ", Requirements: ". $bookData->getOtherReq();
+                }
+                if($_SESSION['em'] != "")
+                {
+                    $em = "Email: ". $_SESSION['em'];
+                }
+                if($_SESSION['pho'] != "")
+                {
+                    $pho = "Phone Number: ". $_SESSION['pho'];
+                }
+                if($_SESSION['add'] != "")
+                {
+                    $add = "Address: ". $_SESSION['add'];
+                }
+
+                echo'
+            <div class="card text-center" id="booking-card">
+                <div class="card-header">
+                    ' . $bookData->getType() . ' - Reference #'. $bookID . '
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">'.$bookData->getTime().':00 on '.$newDate.'</h5>
+                    <p class="card-text">Vehicle: <b>'.$bookData->getVehicle().'</b>'.$req.'</p>
+                    <p class="card-text">Name: <b>'.$_SESSION['na'].'</b></p>
+                    <p class="card-text">'.$em.'</p>
+                    <p class="card-text">'.$pho.'</p>
+                    <p class="card-text">'.$add.'</p>
+                    <form method="post" action="'.$_SERVER['PHP_SELF'].'" onsubmit="return sure('.$bookID.')">
+                        <input type="submit" class="btn btn-primary" name="cancel" value="Cancel Booking"/>
+                        <input type="hidden" name="id" value="'. $bookID .'">
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    '.$bookData->getLocation().'
+                </div>
+            </div>';
+        }
+        echo'</div>
+</div>';
+
+    }
+
+}
+else{
+    echo "<h2>Oops, looks like you're lost!</h2>";
+}
+*/
+?>
+
+
+<script>
+    /*
+    function validate_form(thisForm) {
+        with (thisForm) {
+
+            if (datepicker.value == "") {
+                alert("Please fill in all required fields")
+                return false;
+            }
+        }
+    }
+
+    function sure(id)
+    {
+        with (id) {
+            if (confirm("Are you sure you want to cancel booking reference: #" + id + "?")) {
+
+            } else {
+                alert("Booking reference: #" + id + " was NOT canceled.")
+                return false;
+            }
+        }
+    }
+
+
+     */
+</script>
+
+
+<?php require('template/footer2.phtml') ?>
