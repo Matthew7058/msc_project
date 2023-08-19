@@ -22,7 +22,7 @@ class Database {
         $host='localhost';
         $dbName='u447571383_builder';
         $user='u447571383_leeds';
-        $pass='V8webtechdb!';
+        $pass='HIDDEN';
 
         if(self::$_dbInstance === null) { //checks if the PDO exists
             // creates new instance if not, sending in connection info
