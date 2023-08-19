@@ -21,8 +21,8 @@ with open('/Users/matthewfard/PycharmProjects/flaskProject/result_model2.pkl', '
     result_model = pickle.load(f)
 
 # Replace 'YOUR_API_KEY' with your actual API key
-api_key = 'tj5mFN2hPf7hRfcNq7WE9shwW09uuDG4NSgwmi73'
-api_key2 = 'D65EuvBkZf5lQ7q6izGv19CgxPAq7qaI7oA98IMm'
+api_key = 'HIDDEN'
+api_key2 = 'HIDDEN'
 
 url = 'https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles'
 headers = {
